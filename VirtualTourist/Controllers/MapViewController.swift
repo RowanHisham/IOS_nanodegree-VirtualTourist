@@ -40,16 +40,15 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        navigationController?.setToolbarHidden(true, animated: false)
         setupFetchedResultsController()
         setupMap()
         setupGestureRecognition()
         mapView.delegate = self
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

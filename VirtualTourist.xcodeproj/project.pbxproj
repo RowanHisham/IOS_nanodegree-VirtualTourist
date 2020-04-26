@@ -20,6 +20,7 @@
 		F35E10C7245508C80081D7C6 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E10C6245508C80081D7C6 /* ImageCollectionViewCell.swift */; };
 		F35E10CB24552B1D0081D7C6 /* FlickerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E10CA24552B1D0081D7C6 /* FlickerClient.swift */; };
 		F35E10D0245532310081D7C6 /* FlickerImagesSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E10CF245532300081D7C6 /* FlickerImagesSearchResponse.swift */; };
+		F35E10D224561F680081D7C6 /* CollectionViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E10D124561F680081D7C6 /* CollectionViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		F35E10C6245508C80081D7C6 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		F35E10CA24552B1D0081D7C6 /* FlickerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerClient.swift; sourceTree = "<group>"; };
 		F35E10CF245532300081D7C6 /* FlickerImagesSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerImagesSearchResponse.swift; sourceTree = "<group>"; };
+		F35E10D124561F680081D7C6 /* CollectionViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				F35E10BA2453D1F60081D7C6 /* MapViewControllerExtension.swift */,
 				F35E10C22454BAEE0081D7C6 /* CustomAnnotationView.swift */,
 				F35E10C42455044C0081D7C6 /* CollectionViewController.swift */,
+				F35E10D124561F680081D7C6 /* CollectionViewControllerExtension.swift */,
 				F35E10C6245508C80081D7C6 /* ImageCollectionViewCell.swift */,
 			);
 			path = Controllers;
@@ -215,6 +218,7 @@
 				F35E10CB24552B1D0081D7C6 /* FlickerClient.swift in Sources */,
 				F35E10AA2453CF370081D7C6 /* MapViewController.swift in Sources */,
 				F35E10BB2453D1F60081D7C6 /* MapViewControllerExtension.swift in Sources */,
+				F35E10D224561F680081D7C6 /* CollectionViewControllerExtension.swift in Sources */,
 				F35E10C32454BAEE0081D7C6 /* CustomAnnotationView.swift in Sources */,
 				F35E10A82453CF370081D7C6 /* AppDelegate.swift in Sources */,
 			);

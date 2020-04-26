@@ -64,7 +64,7 @@
             <objects>
                 <collectionViewController id="f33-I2-b6J" customClass="CollectionViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="QDf-6U-HzA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="boc-sn-Mlr">
@@ -102,6 +102,10 @@
                             <outlet property="delegate" destination="f33-I2-b6J" id="bF0-S9-ZyO"/>
                         </connections>
                     </collectionView>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <connections>
+                        <outlet property="flowLayout" destination="boc-sn-Mlr" id="SSH-cB-Xgc"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DIz-1r-7C7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

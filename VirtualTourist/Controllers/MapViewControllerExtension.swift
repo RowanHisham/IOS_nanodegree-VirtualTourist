@@ -56,7 +56,7 @@ extension MapViewController: MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         // do something
-        print("Here")
+        print("Pin Clicked")
         let pinAnnotation = view.annotation as! CustomPinAnnotation
         performSegue(withIdentifier: "CollectionViewSegue", sender: pinAnnotation)
     }
@@ -65,7 +65,7 @@ extension MapViewController: MKMapViewDelegate{
         if segue.identifier == "CollectionViewSegue"{
             let collectionView = segue.destination as! CollectionViewController
             let pinAnnotation = sender as! CustomPinAnnotation
-            collectionView.pinAnnotation = pinAnnotation
+            collectionView.pin = pinAnnotation.pin
             collectionView.dataController = dataController
         }
     }

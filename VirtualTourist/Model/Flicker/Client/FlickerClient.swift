@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class FlickerCLient{
     
@@ -18,12 +19,15 @@ class FlickerCLient{
     enum Endpoints {
         
         case photosSearch([Float])
+        case loadImage([String:String], Int)
         
         var stringValue: String{
             switch self{
-            case .photosSearch(let coordinates): return "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(Auth.key)&lat=\(coordinates[0])&lon=\(coordinates[1])&per_page=25&format=json"
+            case .photosSearch(let coordinates): return "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(Auth.key)&lat=\(coordinates[0])&lon=\(coordinates[1])&per_page=25&page=\(Int.random(in: 1..<10))&format=json"
+            case .loadImage(let data, let farmID): return "https://farm\(farmID).staticflickr.com/\(data["Server"]!)/\(data["ID"]!)_\(data["Secret"]!).jpg"
             }
         }
+        
         var url: URL {
             return URL(string: stringValue)!
         }
@@ -58,6 +62,28 @@ class FlickerCLient{
                 }
             }
         }
+        task.resume()
+    }
+    
+    static func loadImage(photoData: FlickerPhotoData, image: Image, completion: @escaping (Image, Data?, Error?)->Void){
+        print("Load Image")
+        let request = URLRequest(url: Endpoints.loadImage(
+            ["Server": photoData.server ,
+             "ID": photoData.id,
+             "Secret": photoData.secret]
+            , photoData.farm).url)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard error == nil, data != nil else{
+                print(error)
+                 completion(image, nil, error)
+                return
+            }
+            
+            completion(image, data, nil)
+        }
+        
         task.resume()
     }
 }
