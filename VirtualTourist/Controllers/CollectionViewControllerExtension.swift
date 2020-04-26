@@ -84,7 +84,7 @@ extension CollectionViewController{
     
     // Delete Image on tap
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        deleteImage(image: fetchedResultsController.object(at: indexPath))
+        deleteImage(image: images[indexPath.row])
         images.remove(at: indexPath.row)
         collectionView.reloadData()
     }
