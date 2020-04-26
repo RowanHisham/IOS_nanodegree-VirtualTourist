@@ -15,6 +15,11 @@
 		F35E10BB2453D1F60081D7C6 /* MapViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E10BA2453D1F60081D7C6 /* MapViewControllerExtension.swift */; };
 		F35E10BF2453DA590081D7C6 /* VirtualTourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F35E10BD2453DA590081D7C6 /* VirtualTourist.xcdatamodeld */; };
 		F35E10C12453E0DA0081D7C6 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E10C02453E0DA0081D7C6 /* DataController.swift */; };
+		F35E10C32454BAEE0081D7C6 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E10C22454BAEE0081D7C6 /* CustomAnnotationView.swift */; };
+		F35E10C52455044C0081D7C6 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E10C42455044C0081D7C6 /* CollectionViewController.swift */; };
+		F35E10C7245508C80081D7C6 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E10C6245508C80081D7C6 /* ImageCollectionViewCell.swift */; };
+		F35E10CB24552B1D0081D7C6 /* FlickerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E10CA24552B1D0081D7C6 /* FlickerClient.swift */; };
+		F35E10D0245532310081D7C6 /* FlickerImagesSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35E10CF245532300081D7C6 /* FlickerImagesSearchResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +33,11 @@
 		F35E10BA2453D1F60081D7C6 /* MapViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerExtension.swift; sourceTree = "<group>"; };
 		F35E10BE2453DA590081D7C6 /* VirtualTourist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VirtualTourist.xcdatamodel; sourceTree = "<group>"; };
 		F35E10C02453E0DA0081D7C6 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		F35E10C22454BAEE0081D7C6 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
+		F35E10C42455044C0081D7C6 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		F35E10C6245508C80081D7C6 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		F35E10CA24552B1D0081D7C6 /* FlickerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerClient.swift; sourceTree = "<group>"; };
+		F35E10CF245532300081D7C6 /* FlickerImagesSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerImagesSearchResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +86,9 @@
 			children = (
 				F35E10A92453CF370081D7C6 /* MapViewController.swift */,
 				F35E10BA2453D1F60081D7C6 /* MapViewControllerExtension.swift */,
+				F35E10C22454BAEE0081D7C6 /* CustomAnnotationView.swift */,
+				F35E10C42455044C0081D7C6 /* CollectionViewController.swift */,
+				F35E10C6245508C80081D7C6 /* ImageCollectionViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -83,10 +96,44 @@
 		F35E10BC2453DA410081D7C6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F35E10C924552B0B0081D7C6 /* Flicker */,
+				F35E10C824552AFD0081D7C6 /* Data */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F35E10C824552AFD0081D7C6 /* Data */ = {
+			isa = PBXGroup;
+			children = (
 				F35E10BD2453DA590081D7C6 /* VirtualTourist.xcdatamodeld */,
 				F35E10C02453E0DA0081D7C6 /* DataController.swift */,
 			);
-			path = Model;
+			path = Data;
+			sourceTree = "<group>";
+		};
+		F35E10C924552B0B0081D7C6 /* Flicker */ = {
+			isa = PBXGroup;
+			children = (
+				F35E10CE245532160081D7C6 /* Response */,
+				F35E10CD245532060081D7C6 /* Client */,
+			);
+			path = Flicker;
+			sourceTree = "<group>";
+		};
+		F35E10CD245532060081D7C6 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				F35E10CA24552B1D0081D7C6 /* FlickerClient.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		F35E10CE245532160081D7C6 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				F35E10CF245532300081D7C6 /* FlickerImagesSearchResponse.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,9 +208,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F35E10C12453E0DA0081D7C6 /* DataController.swift in Sources */,
+				F35E10D0245532310081D7C6 /* FlickerImagesSearchResponse.swift in Sources */,
 				F35E10BF2453DA590081D7C6 /* VirtualTourist.xcdatamodeld in Sources */,
+				F35E10C7245508C80081D7C6 /* ImageCollectionViewCell.swift in Sources */,
+				F35E10C52455044C0081D7C6 /* CollectionViewController.swift in Sources */,
+				F35E10CB24552B1D0081D7C6 /* FlickerClient.swift in Sources */,
 				F35E10AA2453CF370081D7C6 /* MapViewController.swift in Sources */,
 				F35E10BB2453D1F60081D7C6 /* MapViewControllerExtension.swift in Sources */,
+				F35E10C32454BAEE0081D7C6 /* CustomAnnotationView.swift in Sources */,
 				F35E10A82453CF370081D7C6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

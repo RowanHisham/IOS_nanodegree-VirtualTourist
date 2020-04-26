@@ -23,7 +23,7 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate {
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "pins")
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         do {
             try fetchedResultsController.performFetch()
@@ -49,6 +49,7 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate {
         setupFetchedResultsController()
         setupMap()
         setupGestureRecognition()
+        mapView.delegate = self
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -63,37 +64,13 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate {
         let touchPoint = gestureRecognizer.location(in: mapView)
         let touchMapCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         
-        let newAnnotation = MKPointAnnotation()
-        newAnnotation.coordinate = touchMapCoordinate
         let newPin = Pin(context: dataController.viewContext)
-        newPin.latitude = newAnnotation.coordinate.latitude
-        newPin.longitude = newAnnotation.coordinate.longitude
+        newPin.latitude = touchMapCoordinate.latitude
+        newPin.longitude =  touchMapCoordinate.longitude
         newPin.creationDate = Date()
-        print("New pin Date")
-        print(newPin.creationDate)
-
+        try? dataController.viewContext.save()
         
-        do{
-            print("Before Saving")
-            print(fetchedResultsController.fetchedObjects?.count ?? "")
-
-            for pin in fetchedResultsController.fetchedObjects!{
-                print(pin.creationDate)
-            }
-
-            try? dataController.viewContext.save()
-            print("Saved")
-            try fetchedResultsController.performFetch()
-            print(fetchedResultsController.fetchedObjects?.count ?? "")
-
-            for pin in fetchedResultsController.fetchedObjects!{
-                print(pin.creationDate)
-            }
-
-        }catch{
-            print("Didtn't save")
-        }
-        
+        let newAnnotation = CustomPinAnnotation(coordinate: touchMapCoordinate, pin: newPin)
         mapView.addAnnotation(newAnnotation)
     }
 }
