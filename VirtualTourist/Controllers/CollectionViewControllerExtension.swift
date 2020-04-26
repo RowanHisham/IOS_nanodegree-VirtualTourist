@@ -11,6 +11,9 @@ import UIKit
 
 extension CollectionViewController{
     
+    // -------------------------------------------------------------------------
+    // MARK: - UI
+    
     func configureUI(){
         let space:CGFloat = 2.0
         let dimensionW = (view.frame.size.width - (2 * space)) / 3.0
@@ -19,6 +22,11 @@ extension CollectionViewController{
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: dimensionW, height: dimensionH)
+        
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
+
+        
         self.navigationController?.setToolbarHidden(false, animated: false)
         
         let newCollectionBarButtonItem = UIBarButtonItem(title: "New Collection", style: .done, target: self, action: #selector(getNewCollection))
@@ -28,6 +36,32 @@ extension CollectionViewController{
         
         self.setToolbarItems([spaceItemLeft, newCollectionBarButtonItem, spaceItemRight], animated: false)
     }
+    
+    func showActivity(_ state:Bool){
+        if state {
+            activityIndicator.startAnimating()
+            activityIndicator.isHidden = false
+            navigationController?.toolbar.isUserInteractionEnabled = false
+            navigationController?.navigationBar.isUserInteractionEnabled = false
+        }else{
+            activityIndicator.stopAnimating()
+            activityIndicator.isHidden = true
+            navigationController?.toolbar.isUserInteractionEnabled = true
+            navigationController?.navigationBar.isUserInteractionEnabled = true
+        }
+    }
+    
+    // MARK: Display Error Message to the User
+    func showError(title: String, message: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        alertController.addAction(okButton)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    // -------------------------------------------------------------------------
+    // MARK: - CollectionView
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -48,17 +82,20 @@ extension CollectionViewController{
         return cell
     }
     
+    // Delete Image on tap
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Deleting")
-
         deleteImage(image: fetchedResultsController.object(at: indexPath))
         images.remove(at: indexPath.row)
         collectionView.reloadData()
     }
+
+    
+    // -------------------------------------------------------------------------
+    // MARK: - New Collection
     
     @objc func getNewCollection(){
         for image in images{
-            delete(image)
+            deleteImage(image: image)
         }
         images = []
         collectionView.reloadData()

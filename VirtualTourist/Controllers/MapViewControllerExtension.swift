@@ -11,13 +11,14 @@ import MapKit
 
 extension MapViewController: MKMapViewDelegate{
     
-    // MARK: Extract the information for every student and update annotation list
+    // -------------------------------------------------------------------------
+    // MARK: -Map Setup
+    
+    // Extract the information for every pin and update annotation list
     func setupMap(){
-        print("setting up map")
         var annotations = [CustomPinAnnotation]()
         
-        //TODO: Extract info from pins list
-        
+        //Extract info from pins list
         for pin in fetchedResultsController!.fetchedObjects! {
             let lat = CLLocationDegrees(pin.latitude)
             let long = CLLocationDegrees(pin.longitude)
@@ -26,18 +27,17 @@ extension MapViewController: MKMapViewDelegate{
             //create the annotation and set its coordiate, title, and subtitle properties
             let annotation = CustomPinAnnotation(coordinate: coordinate, pin: pin)
 
-            // append the annotation in an array of annotations.
+            // append the annotation in an array of annotations
             annotations.append(annotation)
-            print(annotation.pin.creationDate)
         }
         
-        // add the annotations to the map.
+        // add the annotations to the map
         self.mapView.addAnnotations(annotations)
         self.mapView.reloadInputViews()
     }
     
     
-    // MARK: Update and Display PinMarker
+    // Update and Display PinMarker
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
         
@@ -54,9 +54,10 @@ extension MapViewController: MKMapViewDelegate{
         return pinView
     }
     
+    // -------------------------------------------------------------------------
+    // MARK: - Navigation
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        // do something
-        print("Pin Clicked")
         let pinAnnotation = view.annotation as! CustomPinAnnotation
         performSegue(withIdentifier: "CollectionViewSegue", sender: pinAnnotation)
     }

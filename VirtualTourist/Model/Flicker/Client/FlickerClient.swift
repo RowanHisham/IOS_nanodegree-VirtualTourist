@@ -35,24 +35,22 @@ class FlickerCLient{
     
     
     static func getPhotosSearch(latitude: Double, longitude: Double, completion: @escaping (FlickerImagesSearchResponse?, Error?) -> Void){
-        print("SETTING UP REQUEST")
         let request = URLRequest(url: Endpoints.photosSearch([Float(latitude),Float(longitude)]).url)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             
             guard var data = data else{
-                print(error?.localizedDescription)
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
                 return
             }
             
+            // remove extra characters from the begininng to be able to parse response
             data = data.subdata(in: (14..<(data.count-1)))
             let decoder = JSONDecoder()
             do{
                 let flickerImagesSearchResponse = try decoder.decode(FlickerImagesSearchResponse.self, from: data)
 
-                print(flickerImagesSearchResponse.photos?.photo.count)
                 DispatchQueue.main.async {
                     completion(flickerImagesSearchResponse,nil)
                 }
@@ -66,7 +64,6 @@ class FlickerCLient{
     }
     
     static func loadImage(photoData: FlickerPhotoData, image: Image, completion: @escaping (Image, Data?, Error?)->Void){
-        print("Load Image")
         let request = URLRequest(url: Endpoints.loadImage(
             ["Server": photoData.server ,
              "ID": photoData.id,
@@ -76,7 +73,6 @@ class FlickerCLient{
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             
             guard error == nil, data != nil else{
-                print(error)
                  completion(image, nil, error)
                 return
             }

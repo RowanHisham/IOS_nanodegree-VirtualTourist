@@ -12,25 +12,15 @@ import CoreData
 class CollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
 
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var dataController: DataController!
     var pin: Pin!
-    var fetchedResultsController:NSFetchedResultsController<Image>!
     var images: [Image] = []
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        configureUI()
-        setupFetchedResultsController()
-        setupCells()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        fetchedResultsController = nil
-    }
-    
+    var fetchedResultsController:NSFetchedResultsController<Image>!
+
+    //Setup Fetch Request to Retrieve Images Related to Pin
     func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<Image> = Image.fetchRequest()
         let predicate = NSPredicate(format: "pin == %@", pin)
@@ -48,69 +38,90 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureUI()
+        setupFetchedResultsController()
+        setupCells()
+    }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        fetchedResultsController = nil
+    }
+    
+    
+    // -------------------------------------------------------------------------
+    // MARK: - Flicker
+    
+    // Display Fetched Images, if there's no saved Images Search on Flicker
     func setupCells(){
         guard (fetchedResultsController.fetchedObjects?.count != 0) else{
-            print("No Saved Images")
             loadFLickerImages()
             return
         }
         
-        print("Showing Saved Images")
+        showActivity(true)
         images = fetchedResultsController.fetchedObjects!
         collectionView.reloadData()
+        showActivity(false)
     }
     
+    // Search on Flicker with Coordiantes of the Pin
     func loadFLickerImages() {
-        print("LOADING Images")
+        //TODO: START ACTIVITY
+        showActivity(true)
         FlickerCLient.getPhotosSearch(latitude: pin.latitude, longitude:  pin.longitude, completion: handleFlickerImagesSearchResponse)
     }
 
+    // Show placeholder image for the amount of found images in the search while downloading them
     func handleFlickerImagesSearchResponse(response: FlickerImagesSearchResponse?, error: Error?){
         guard error == nil , response != nil else {
-            print("error")
+            showActivity(false)
+            showError(title: "Error", message: error?.localizedDescription ?? "try again later")
             return
         }
         
         guard (response?.photos?.photo.count ?? 0) > 0 else {
-            print("No Photos Found")
+            showActivity(false)
+            showError(title: "No Photos Found", message: "No photos found at this location, try again later")
             return
         }
         
-        
-        print("Adding Images")
         images = []
         for photoData in (response?.photos?.photo)! {
             let image = Image(context:dataController.viewContext)
             image.image = UIImage(named: "placeholderImage")!.pngData()
             images.append(image)
-            collectionView.reloadData()
             
-            //TODO: LOAD DATA AND UPDATE IMAGES
+            //Download Image
             FlickerCLient.loadImage(photoData: photoData, image: image, completion: handleLoadImage)
         }
+        collectionView.reloadData()
+        showActivity(false)
     }
     
+    
+    // Replace placeholder image with downloaded image and save context
     func handleLoadImage(image: Image, data: Data?, error: Error?){
-        guard data != nil else {
-            print("Can't Display Image")
+        guard data != nil, error == nil else {
+            images.remove(at: images.firstIndex(of: image)!)
+            dataController.viewContext.delete(image)
+            return
+        }
+        
+        guard images.contains(image) else{
             return
         }
         
         image.image = data
         image.creationDate = Date()
         image.pin = pin
-        do{
-            print("Saving...")
-            try dataController.viewContext.save()
-        }catch{
-            print(error)
-        }
+
+        try? dataController.viewContext.save()
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }
-    
-    
 }

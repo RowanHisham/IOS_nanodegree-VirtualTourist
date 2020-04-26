@@ -18,6 +18,8 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     var fetchedResultsController:NSFetchedResultsController<Pin>!
     
+    
+    //Setup Fetch Request to Retrieve Pins
     fileprivate func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<Pin> = Pin.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
@@ -32,12 +34,6 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
-    fileprivate func setupGestureRecognition() {
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.handleLongPress(_:)))
-        longPressRecogniser.minimumPressDuration = 2.0
-        mapView.addGestureRecognizer(longPressRecogniser)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setToolbarHidden(true, animated: false)
@@ -47,15 +43,19 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate {
         mapView.delegate = self
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         fetchedResultsController = nil
     }
     
+    // -------------------------------------------------------------------------
+    // MARK: -Gesture
+    
+    func setupGestureRecognition() {
+        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.handleLongPress(_:)))
+        longPressRecogniser.minimumPressDuration = 2.0
+        mapView.addGestureRecognizer(longPressRecogniser)
+    }
     
     @objc func handleLongPress(_ gestureRecognizer : UIGestureRecognizer){
         if gestureRecognizer.state != .began { return }
