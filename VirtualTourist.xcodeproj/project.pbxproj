@@ -53,6 +53,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F31D7D4824565EFF00E46B82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F35E10AB2453CF370081D7C6 /* Main.storyboard */,
+				F35E10B02453CF3A0081D7C6 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F35E109B2453CF370081D7C6 = {
 			isa = PBXGroup;
 			children = (
@@ -72,12 +81,11 @@
 		F35E10A62453CF370081D7C6 /* VirtualTourist */ = {
 			isa = PBXGroup;
 			children = (
-				F35E10BC2453DA410081D7C6 /* Model */,
 				F35E10A72453CF370081D7C6 /* AppDelegate.swift */,
+				F35E10BC2453DA410081D7C6 /* Model */,
 				F35E10B92453D1D70081D7C6 /* Controllers */,
-				F35E10AB2453CF370081D7C6 /* Main.storyboard */,
+				F31D7D4824565EFF00E46B82 /* Views */,
 				F35E10AE2453CF3A0081D7C6 /* Assets.xcassets */,
-				F35E10B02453CF3A0081D7C6 /* LaunchScreen.storyboard */,
 				F35E10B32453CF3A0081D7C6 /* Info.plist */,
 			);
 			path = VirtualTourist;
