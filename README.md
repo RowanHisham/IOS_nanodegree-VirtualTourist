@@ -27,7 +27,7 @@ is dropped it is persisted and available on app relaunch, tapping the pin opens 
 
 ### Photo Album Screen 
 Displays Images downloaded from Flicker using the pin Geolocation. Images are fetched from memory, if there's no images saved,
-a set of Images is downloded form Flicker. Users can delete photos from existing albums by tapping them. The New Collection
+a set of Images is downloded form Flicker with placeholder images displayed until the images finishes downloading. Users can delete photos from existing albums by tapping them. The New Collection
 button initiates the download of a new album, replacing the images in the photo album with a new set from Flickr and saves them.
 
 <img src="https://github.com/RowanHisham/README-Images/blob/master/virtualTourist3.png" alt="alt text" width="300" height="550" ><img src="https://github.com/RowanHisham/README-Images/blob/master/virtualTourist4.png" alt="alt text" width="300" height="550" >
