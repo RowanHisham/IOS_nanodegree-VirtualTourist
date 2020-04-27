@@ -1,14 +1,14 @@
 # Virtual Tourist
 This is the fourth portfolio app from Udacity iOS Developer Nanodegree. The app downloads and stores images from Flickr.
 The app allows users to drop pins on a map, as if they were stops on a tour. Users will then be able to download pictures 
-for the location and persist boththe pictures, and the association of the pictures with the pin coordinates. Users
+for the location and persist boththe pictures, and the association of the pictures with the pin coordinates.
 
  * [Project Rubric](https://review.udacity.com/#!/rubrics/1990/view)
 
 ## This project focused on
 * Store media on the device file system
 * Use Core Data for local persistence of an object structure
-* Accessing networked data using Apple’s URL loading framework - Flicker API
+* Accessing networked data - Flicker API
 * Parsing JSON file using Codable (Decodable , Encodable)
 * Creating user interfaces that are responsive using asynchronous requests
 * Use MapKit framework to display pins on a map
