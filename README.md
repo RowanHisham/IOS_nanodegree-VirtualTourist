@@ -1,7 +1,7 @@
 # Virtual Tourist
-This is the fourth portfolio app from Udacity iOS Developer Nanodegree. The app downloads and stores images from Flickr.
+This is the fourth portfolio app from Udacity iOS Developer Nanodegree.
 The app allows users to drop pins on a map, as if they were stops on a tour. Users will then be able to download pictures 
-for the location and persist boththe pictures, and the association of the pictures with the pin coordinates.
+from Flicker for the location and persist both the pictures, and the association of the pictures with the pin coordinates.
 
  * [Project Rubric](https://review.udacity.com/#!/rubrics/1990/view)
 
